@@ -87,8 +87,8 @@ show_optvars "$@"
 
 # end with a space
 
-APP="$APPNAME gpg perl-CGI "
-PERL=""
+APP="$APPNAME gpg "
+PERL="CGI "
 PYTH=""
 PIPS=""
 CPAN=""
