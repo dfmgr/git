@@ -71,7 +71,7 @@ dfmgr_install
 
 # Set options
 
-APPDIR="${APPDIR:-$CONF/$APPNAME}"
+APPDIR="$CONF/$APPNAME"
 PLUGDIR="$SHARE/$APPNAME"
 REPO="${DFMGRREPO:-https://github.com/dfmgr}/$APPNAME"
 
