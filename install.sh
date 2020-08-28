@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-APPNAME="$(basename $0)"
+APPNAME="git"
 USER="${SUDO_USER:-${USER}}"
 HOME="${USER_HOME:-${HOME}}"
 
@@ -24,20 +24,17 @@ SCRIPTSFUNCTFILE="${SCRIPTSAPPFUNCTFILE:-app-installer.bash}"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if [ -f "$SCRIPTSFUNCTDIR/functions/$SCRIPTSFUNCTFILE" ]; then
-    . "$SCRIPTSFUNCTDIR/functions/$SCRIPTSFUNCTFILE"
+  . "$SCRIPTSFUNCTDIR/functions/$SCRIPTSFUNCTFILE"
 elif [ -f "$HOME/.local/share/CasjaysDev/functions/$SCRIPTSFUNCTFILE" ]; then
-    . "$HOME/.local/share/CasjaysDev/functions/$SCRIPTSFUNCTFILE"
+  . "$HOME/.local/share/CasjaysDev/functions/$SCRIPTSFUNCTFILE"
 else
-    curl -LSs "$SCRIPTSFUNCTURL/$SCRIPTSFUNCTFILE" -o "/tmp/$SCRIPTSFUNCTFILE" || exit 1
-    . "/tmp/$SCRIPTSFUNCTFILE"
+  curl -LSs "$SCRIPTSFUNCTURL/$SCRIPTSFUNCTFILE" -o "/tmp/$SCRIPTSFUNCTFILE" || exit 1
+  . "/tmp/$SCRIPTSFUNCTFILE"
 fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Install Type: user_installdirs system_installdirs
-
 user_installdirs
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # OS Support: supported_os unsupported_oses
 
 unsupported_oses
@@ -51,15 +48,18 @@ scripts_check
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Defaults
-
-APPNAME="git"
-PLUGNAMES="oh-my-git "
+APPNAME="${APPNAME:-git}"
+APPDIR="${APPDIR:-$HOME/.config/$APPNAME}"
+REPO="${DFMGRREPO:-https://github.com/dfmgr}/${APPNAME}"
+REPORAW="${REPORAW:-$REPO/raw}"
+APPVERSION="$(curl -LSs $REPORAW/master/version.txt)"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-# Version
+# Setup plugins
 
-APPVERSION="$(curl -LSs ${DFMGRREPO:-https://github.com/dfmgr}/$APPNAME/raw/master/version.txt)"
+PLUGNAMES="oh-my-git "
+PLUGDIR="${SHARE:-$HOME/.local/share}"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -69,11 +69,7 @@ dfmgr_install
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-# Set options
-
-APPDIR="$CONF/$APPNAME"
-PLUGDIR="$SHARE/$APPNAME"
-REPO="${DFMGRREPO:-https://github.com/dfmgr}/$APPNAME"
+# Version
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -127,7 +123,7 @@ install_cpan $CPAN
 install_gem $GEMS
 
 # Other dependencies
-dotfilesreq
+dotfilesreq git
 dotfilesreqadmin
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -142,14 +138,14 @@ ensure_perms
 # Main progam
 
 if [ -d "$APPDIR/.git" ]; then
-    execute \
-    "git_update $APPDIR" \
-    "Updating $APPNAME configurations"
+  execute \
+  "git_update $APPDIR" \
+  "Updating $APPNAME configurations"
 else
-    execute \
-    "backupapp && \
+  execute \
+  "backupapp && \
         git_clone -q $REPO/$APPNAME $APPDIR" \
-    "Installing $APPNAME configurations"
+  "Installing $APPNAME configurations"
 fi
 
 # exit on fail
@@ -160,15 +156,15 @@ failexitcode
 # Plugins
 
 if [ "$PLUGNAMES" != "" ]; then
-    if [ -d "$PLUGDIR"/oh-my-git/.git ]; then
-        execute \
-        "git_update $PLUGDIR" \
-        "Updating plugin oh-my-git"
-    else
-        execute \
-        "git_clone https://github.com/arialdomartini/oh-my-git.git $PLUGDIR/oh-my-git" \
-        "Installing plugin PLUGNAME"
-    fi
+  if [ -d "$PLUGDIR"/oh-my-git/.git ]; then
+    execute \
+    "git_update $PLUGDIR/oh-my-git" \
+    "Updating plugin oh-my-git"
+  else
+    execute \
+    "git_clone https://github.com/arialdomartini/oh-my-git.git $PLUGDIR/oh-my-git" \
+    "Installing plugin oh-my-git"
+  fi
 fi
 
 # exit on fail
@@ -179,7 +175,7 @@ failexitcode
 # run post install scripts
 
 run_postinst() {
-    dfmgr_run_post
+  dfmgr_run_post
 }
 
 execute \
