@@ -22,9 +22,9 @@ w   = instaweb --httpd=webrick              # Start web-based visualizer.
 
 s = "!f() { \
   if [ $(git status | grep clean >/dev/null 2>&1) ]; then \
-    printf_red "There are changes pending\n" \
+    echo -e "\033[0;31m\t\tThere are changes pending\n\033[0m" \
   else \
-    printf_green "There is nothing to commit\n" \
+    echo -e "\033[0;32m\t\tThere is nothing to commit\n\033[0m" \
   fi \
 ; }; f"
 
