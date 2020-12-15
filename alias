@@ -21,11 +21,11 @@ w   = instaweb --httpd=webrick              # Start web-based visualizer.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 s = "!f() { \
-  if [ $(git status | grep clean >/dev/null 2>&1) ]; then 
-    printf_red "There are changes pending\n"
-  else
-    printf_green "There is nothing to commit\n" 
-  fi
+  if [ $(git status | grep clean >/dev/null 2>&1) ]; then \
+    printf_red "There are changes pending\n" \
+  else \
+    printf_green "There is nothing to commit\n" \
+  fi \
 ; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
