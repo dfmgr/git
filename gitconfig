@@ -5,18 +5,18 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [core]
   abbrev = 12
-  attributesfile = ~/.config/git/gitattributes
-  excludesfile = ~/.config/git/gitignore
+  attributesfile = ~/.config/git/secure/gitattributes
+  excludesfile = ~/.config/git/secure/gitignore
   autocrlf = input
   editor = vim
   compression = -1
   packedGitLimit = 128m
   packedGitWindowSize = 128m
   fileMode = false
-  
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [commit]
-  template = ~/.config/git/message
+  template = ~/.config/git/secure/message
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [gpg]
@@ -74,7 +74,7 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [pull]
   rebase = false
-  
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [user]
   useConfigOnly = true
@@ -90,7 +90,7 @@
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [credential]
-  helper = store --file ~/.config/git/git-credentials
+  helper = store --file ~/.config/git/secure/credentials
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [include]

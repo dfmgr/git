@@ -176,6 +176,10 @@ failexitcode
 
 run_postinst() {
   dfmgr_run_post
+  mkd "$APPDIR/secure"
+  [ ! -f $APPDIR/gitignore ] && [ -f $APPDIR/secure/gitignore ] || mv_fv $APPDIR/gitignore $APPDIR/secure/gitignore
+  [ ! -f $APPDIR/gitattributes ] && [ -f $APPDIR/secure/gitattributes ] || mv_fv $APPDIR/gitattributes $APPDIR/secure/gitattributes
+  [ ! -f $APPDIR/git-credentials ] && [ -f $APPDIR/secure/credentials ] || mv_fv $APPDIR/git-credentials $APPDIR/secure/credentials
   ln_sf "$APPDIR/gitconfig" "$HOME/.gitconfig"
 }
 
