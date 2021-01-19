@@ -52,7 +52,7 @@ APPNAME="${APPNAME:-git}"
 APPDIR="${APPDIR:-$HOME/.config/$APPNAME}"
 REPO="${DFMGRREPO:-https://github.com/dfmgr}/${APPNAME}"
 REPORAW="${REPORAW:-$REPO/raw}"
-APPVERSION="$(curl -LSs $REPORAW/master/version.txt)"
+APPVERSION="$(__appversion)"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -137,15 +137,15 @@ ensure_perms
 
 # Main progam
 
-if [ -d "$APPDIR/.git" ]; then
+if [ -d "$DOWNLOADED_TO/.git" ]; then
   execute \
-  "git_update $APPDIR" \
-  "Updating $APPNAME configurations"
+    "git_update $APPDIR" \
+    "Updating $APPNAME configurations"
 else
   execute \
-  "backupapp && \
+    "backupapp && \
         git_clone -q $REPO/$APPNAME $APPDIR" \
-  "Installing $APPNAME configurations"
+    "Installing $APPNAME configurations"
 fi
 
 # exit on fail
@@ -158,12 +158,12 @@ failexitcode
 if [ "$PLUGNAMES" != "" ]; then
   if [ -d "$PLUGDIR"/oh-my-git/.git ]; then
     execute \
-    "git_update $PLUGDIR/oh-my-git" \
-    "Updating plugin oh-my-git"
+      "git_update $PLUGDIR/oh-my-git" \
+      "Updating plugin oh-my-git"
   else
     execute \
-    "git_clone https://github.com/arialdomartini/oh-my-git.git $PLUGDIR/oh-my-git" \
-    "Installing plugin oh-my-git"
+      "git_clone https://github.com/arialdomartini/oh-my-git.git $PLUGDIR/oh-my-git" \
+      "Installing plugin oh-my-git"
   fi
 fi
 
@@ -176,16 +176,16 @@ failexitcode
 
 run_postinst() {
   dfmgr_run_post
-  mkd "$APPDIR/secure"
+  mkd "$DOWNLOADED_TO/secure"
   [ ! -f $APPDIR/gitignore ] && [ -f $APPDIR/secure/gitignore ] || mv_fv $APPDIR/gitignore $APPDIR/secure/gitignore
   [ ! -f $APPDIR/gitattributes ] && [ -f $APPDIR/secure/gitattributes ] || mv_fv $APPDIR/gitattributes $APPDIR/secure/gitattributes
   [ ! -f $APPDIR/git-credentials ] && [ -f $APPDIR/secure/credentials ] || mv_fv $APPDIR/git-credentials $APPDIR/secure/credentials
-  ln_sf "$APPDIR/gitconfig" "$HOME/.gitconfig"
+  ln_sf "$DOWNLOADED_TO/gitconfig" "$HOME/.gitconfig"
 }
 
 execute \
-"run_postinst" \
-"Running post install scripts"
+  "run_postinst" \
+  "Running post install scripts"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
