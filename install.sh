@@ -155,6 +155,7 @@ failexitcode
 
 # Plugins
 
+if __am_i_online; then
 if [ "$PLUGNAMES" != "" ]; then
   if [ -d "$PLUGDIR"/oh-my-git/.git ]; then
     execute \
@@ -165,6 +166,7 @@ if [ "$PLUGNAMES" != "" ]; then
       "git_clone https://github.com/arialdomartini/oh-my-git.git $PLUGDIR/oh-my-git" \
       "Installing plugin oh-my-git"
   fi
+fi
 fi
 
 # exit on fail
