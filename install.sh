@@ -137,14 +137,17 @@ ensure_perms
 
 # Main progam
 
+if [ -d "$APPDIR" ]; then
+  execute "backupapp $APPDIR $APPNAME" "Backing up $APPDIR"
+fi
+
 if [ -d "$DOWNLOADED_TO/.git" ]; then
   execute \
     "git_update $DOWNLOADED_TO" \
     "Updating $APPNAME configurations"
 else
   execute \
-    "backupapp && \
-        git_clone -q $REPO/$APPNAME $DOWNLOADED_TO" \
+    "git_clone -q $REPO/$APPNAME $DOWNLOADED_TO" \
     "Installing $APPNAME configurations"
 fi
 
@@ -156,21 +159,21 @@ failexitcode
 # Plugins
 
 if __am_i_online; then
-if [ "$PLUGNAMES" != "" ]; then
-  if [ -d "$PLUGDIR"/oh-my-git/.git ]; then
-    execute \
-      "git_update $PLUGDIR/oh-my-git" \
-      "Updating plugin oh-my-git"
-  else
-    execute \
-      "git_clone https://github.com/arialdomartini/oh-my-git.git $PLUGDIR/oh-my-git" \
-      "Installing plugin oh-my-git"
+  if [ "$PLUGNAMES" != "" ]; then
+    if [ -d "$PLUGDIR"/oh-my-git/.git ]; then
+      execute \
+        "git_update $PLUGDIR/oh-my-git" \
+        "Updating plugin oh-my-git"
+    else
+      execute \
+        "git_clone https://github.com/arialdomartini/oh-my-git.git $PLUGDIR/oh-my-git" \
+        "Installing plugin oh-my-git"
+    fi
   fi
-fi
-fi
 
-# exit on fail
-failexitcode
+  # exit on fail
+  failexitcode
+fi
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
