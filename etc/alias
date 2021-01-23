@@ -19,7 +19,11 @@ r   = rebase
 w   = instaweb --httpd=webrick              # Start web-based visualizer.
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Setup a new repo and add files to it (Requires my scripts to be installed).
+setup = !"f() { gitadmin setup "$@" ; }; f"
 
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 s = "!f(){ git status -s -b; };f"
 
 #s = "!f() { \
@@ -31,40 +35,34 @@ s = "!f(){ git status -s -b; };f"
 #; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 new = "!f(){ git init && git symbolic-ref HEAD refs/heads/main; };f"
 update = "!f(){ git checkout master; git branch -m master main; git fetch; git branch --unset-upstream; git branch -u origin/main; };f"
 master2main = "!f(){ git branch -m master main; git checkout main; git push -u origin main; git push origin --delete master; };f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+# branching
 rmbranch = "!f(){ git branch -d ${1} && git push origin --delete ${1}; };f"
 mkbranch = "!f(){ git checkout -b ${1} && git push origin -u ${1}; };f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+#
 unfuck = "!f(){ git reset --hard origin/`git rev-parse --abbrev-ref HEAD`; rm -fv `git st | grep ^? | cut -d' '  -f2-`; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # pull and update everything
-
 smsa = "!f() { git submodule foreach 'git fetch origin --tags; git checkout master; git pull' && git pull && git submodule update --init --recursive; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # emojify git log
-
 emj = "!f() { git log --color | emojify ;  }; f"
 log = "!f() { git log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(red)%h%C(r) —— %C(bold blue)%an%C(r): %C(white)%s%C(r) %C(dim white) %C(bold green)(%ar)%C(r) %C(bold yellow)%d%C(r)' --all ;} f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Find commits by source code.
-
 cc = "!f() { git log --pretty=custom --decorate --date=short -S\"$1\"; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Remove the tag with the specified tag name if
-# exists and tag the latest commit with that name.
-
+# Remove the tag with the specified tag name if exists and tag the latest commit with that name.
 retag = "!f() { git tag -d "$1" &> /dev/null; git tag $1; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -74,66 +72,54 @@ rlc = "!f() { declare n=\"${1:-1}\"; git reset --hard \"HEAD~$n\"; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Undo last commits (by default it undoes the last commit).
-
 ulc = "!f() { declare n=\"${1:-1}\"; git reset --soft \"HEAD~$n\"; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Find commits by commit message.
-
 cm = "!f() { git log --pretty=custom --decorate --date=short --grep=\"$1\"; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Credit an author on the latest commit.
-
 credit = "!f() { if [ -n \"$1\" ] && [ -n \"$2\" ]; then git commit --amend --author \"$1 <$2>\" -C HEAD; fi; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Credit a co-author on the latest commit.
-
 credit-co-author = "!f() { if [ -n \"$1\" ] && [ -n \"$2\" ]; then GIT_EDITOR=\"git interpret-trailers --in-place --trailer='Co-authored-by: $1 <$2>'\" git commit --amend; fi; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # List remote branches.
-
 lrb = "!f() { remote="${1:-origin}"; git ls-remote --heads "$remote"; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # github repos (Requires my scripts to be installed).
-
 ghm = "!f() { gitadmin github init "$1" ; }; f"
 ghc = "!f() { gitadmin github clone "$1" ; }; f"
 ghr = "!f() { gitadmin github remote "$1" ; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # gitlab repos (Requires my scripts to be installed).
-
 glm = "!f() { gitadmin gitlab init "$1" ; }; f"
 glc = "!f() { gitadmin gitlab clone "$1" ; }; f"
 glr = "!f() { gitadmin gitlab remote "$1" ; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # private repos (Requires my scripts to be installed).
-
 glm = "!f() { gitadmin private init "$1" ; }; f"
 gpc = "!f() { gitadmin private clone "$1" ; }; f"
 gpr = "!f() { gitadmin private remote "$1" ; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Create new site from theme (Requires my scripts to be installed).
-
 newsite = "!f() { gitadmin newsite "$1" ; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 # generate gitignore (Requires my scripts to be installed).
-
 gi = "!f() { gitignore "$@" ; }; f"
 ignore = "!f() { gitignore "$@" ; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Merge GitHub pull request on top of the current branch or,
 # if a branch name is specified, on top of the specified branch.
-
 mpr = "!f() { \
     declare currentBranch=\"$(git symbolic-ref --short HEAD)\"; \
     declare branch=\"${2:-$currentBranch}\"; \
@@ -149,13 +135,7 @@ mpr = "!f() { \
 }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Setup a new repo and add files to it (Requires my scripts to be installed).
-
-setup = !"f() { gitadmin setup "$@" ; }; f"
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # chart: show a summary chart of activity per author.
-
   chart = "!f() { \
     git log \
     --format=oneline \
@@ -195,46 +175,35 @@ setup = !"f() { gitadmin setup "$@" ; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Show a specific format string and its number of log entries
-
   log-of-format-and-count = "!f() { format=\"$1\"; shift; git log $@ --format=oneline --format="$format" | awk '{a[$0]++}END{for(i in a){print i, a[i], int((a[i]/NR)*100) \"%\"}}' | sort; }; f"
   log-of-count-and-format = "!f() { format=\"$1\"; shift; git log $@ --format=oneline --format="$format" | awk '{a[$0]++}END{for(i in a){print a[i], int((a[i]/NR)*100) \"%\", i}}' | sort -nr; }; f"
-
   # Show the number of log entries by a specific format string and date format string
   log-of-format-and-count-with-date = "!f() { format=\"$1\"; shift; date_format=\"$1\"; shift; git log $@ --format=oneline --format=\"$format\" --date=format:\"$date_format\" | awk '{a[$0]++}END{for(i in a){print i, a[i], int((a[i]/NR)*100) \"%\"}}' | sort -r; }; f"
   log-of-count-and-format-with-date = "!f() { format=\"$1\"; shift; date_format=\"$1\"; shift; git log $@ --format=oneline --format=\"$format\" --date=format:\"$date_format\" | awk '{a[$0]++}END{for(i in a){print a[i], int((a[i]/NR)*100) \"%\", i}}' | sort -nr; }; f"
-
   # Show the number of log items by email
   log-of-email-and-count         = "!f() { git log-of-format-and-count \"%aE\" $@; }; f"
   log-of-count-and-email         = "!f() { git log-of-count-and-format \"%aE\" $@; }; f"
-
   # Show the number of log items by hour
   log-of-hour-and-count          = "!f() { git log-of-format-and-count-with-date \"%ad\" \"%Y-%m-%dT%H\" $@ ; }; f"
   log-of-count-and-hour          = "!f() { git log-of-count-and-format-with-date \"%ad\" \"%Y-%m-%dT%H\" $@ ; }; f"
-
   # Show the number of log items by day
   log-of-day-and-count           = "!f() { git log-of-format-and-count-with-date \"%ad\" \"%Y-%m-%d\" $@ ; }; f"
   log-of-count-and-day           = "!f() { git log-of-count-and-format-with-date \"%ad\" \"%Y-%m-%d\" $@ ; }; f"
-
   # Show the number of log items by week
   log-of-week-and-count          = "!f() { git log-of-format-and-count-with-date \"%ad\" \"%Y#%V\" $@; }; f"
   log-of-count-and-week          = "!f() { git log-of-count-and-format-with-date \"%ad\" \"%Y#%V\" $@; }; f"
-
   # Show the number of log items by month
   log-of-month-and-count         = "!f() { git log-of-format-and-count-with-date \"%ad\" \"%Y-%m\" $@ ; }; f"
   log-of-count-and-month         = "!f() { git log-of-count-and-format-with-date \"%ad\" \"%Y-%m\" $@ ; }; f"
-
   # Show the number of log items by year
   log-of-year-and-count          = "!f() { git log-of-format-and-count-with-date \"%ad\" \"%Y\" $@ ; }; f"
   log-of-count-and-year          = "!f() { git log-of-count-and-format-with-date \"%ad\" \"%Y\" $@ ; }; f"
-
   # Show the number of log items by hour of day
   log-of-hour-of-day-and-count   = "!f() { git log-of-format-and-count-with-date \"%ad\" \"%H\" $@; }; f"
   log-of-count-and-hour-of-day   = "!f() { git log-of-count-and-format-with-date \"%ad\" \"%H\" $@; }; f"
-
   # Show the number of log items by day of week
   log-of-day-of-week-and-count   = "!f() { git log-of-format-and-count-with-date \"%ad\" \"%u\" $@; }; f"
   log-of-count-and-day-of-week   = "!f() { git log-of-count-and-format-with-date \"%ad\" \"%u\" $@; }; f"
-
   # Show the number of log items by week of year
   log-of-week-of-year-and-count  = "!f() { git log-of-format-and-count-with-date \"%ad\" \"%V\" $@; }; f"
   log-of-count-and-week-of-year  = "!f() { git log-of-count-and-format-with-date \"%ad\" \"%V\" $@; }; f"
@@ -247,7 +216,6 @@ setup = !"f() { gitadmin setup "$@" ; }; f"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # summary: print a helpful summary of some typical metrics
-
   churn = !"f() { git log --all --find-copies --find-renames --name-only --format='format:' \"$@\" | awk 'NF{a[$0]++}END{for(i in a){print a[i], i}}' | sort -rn;};f"
   summary = "!f() { \
     printf \"Summary of this branch...\n\"; \

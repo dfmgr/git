@@ -1,8 +1,4 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-[init]
-  defaultBranch = main
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [core]
   abbrev = 12
   attributesfile = ~/.config/git/secure/gitattributes
@@ -17,6 +13,20 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [commit]
   template = ~/.config/git/secure/message
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[credential]
+  helper = store --file ~/.config/git/secure/credentials
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[include]
+  path = ~/.config/git/alias
+  path = ~/.config/git/functions
+  path = ~/.config/local/gitconfig.local
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[init]
+  defaultBranch = main
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [gpg]
@@ -87,16 +97,6 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [receive]
   denyNonFastforwards = false
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-[credential]
-  helper = store --file ~/.config/git/secure/credentials
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-[include]
-  path = ~/.config/git/alias
-  path = ~/.config/git/functions
-  path = ~/.config/local/gitconfig.local
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #end
