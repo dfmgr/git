@@ -1,8 +1,8 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [core]
   abbrev = 12
-  attributesfile = ~/.config/secure/gitattributes
-  excludesfile = ~/.config/secure/gitignore
+  attributesfile = ~/.config/secure/git/attributes
+  excludesfile = ~/.config/secure/git/ignore
   autocrlf = input
   editor = vim
   compression = -1
@@ -12,11 +12,11 @@
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [commit]
-  template = ~/.config/git/secure/message
+  template = ~/.config/secure/git/message
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [credential]
-  helper = store --file ~/.config/secure/git-credentials
+  helper = store --file ~/.config/secure/git/credentials
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [init]
