@@ -182,10 +182,12 @@ fi
 
 run_postinst() {
   dfmgr_run_post
-  mkd "$APPDIR/secure"
-  [ ! -f "$APPDIR/gitignore" ] && [ -f "$APPDIR/secure/gitignore" ] || mv_fv "$APPDIR/gitignore" "$APPDIR/secure/gitignore"
-  [ ! -f "$APPDIR/gitattributes" ] && [ -f "$APPDIR/secure/gitattributes" ] || mv_fv "$APPDIR/gitattributes" "$APPDIR/secure/gitattributes"
-  [ ! -f "$APPDIR/git-credentials" ] && [ -f "$APPDIR/secure/credentials" ] || mv_fv "$APPDIR/git-credentials" "$APPDIR/secure/credentials"
+  mkd "$HOME/.config/secure"
+  [ -f "$APPDIR/gitignore" ] && [ ! -f "$HOME/.config/secure/gitignore" ] && cp_rf "$APPDIR/gitignore" "$HOME/.config/secure/gitignore"
+  [ -f "$APPDIR/gitattributes" ] && [ ! -f "$HOME/.config/secure/gitattributes" ] && cp_rf "$APPDIR/gitattributes" "$HOME/.config/secure/gitattributes"
+  [ -f "$APPDIR/git-credentials" ] && [ ! -f "$HOME/.config/secure/credentials" ] && mv_fv "$APPDIR/git-credentials" "$HOME/.config/secure/credentials"
+  [ -f "$HOME/.git-credentials" ] && [ ! -f "$HOME/.config/secure/credentials" ] && mv_fv "$HOME/.git-credentials" "$HOME/.config/secure/credentials"
+  [ -L "$HOME/.git-credentials" ] && unlink "$HOME/.git-credentials"
   ln_sf "$APPDIR/gitconfig" "$HOME/.gitconfig"
 }
 

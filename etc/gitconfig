@@ -1,8 +1,8 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [core]
   abbrev = 12
-  attributesfile = ~/.config/git/secure/gitattributes
-  excludesfile = ~/.config/git/secure/gitignore
+  attributesfile = ~/.config/secure/gitattributes
+  excludesfile = ~/.config/secure/gitignore
   autocrlf = input
   editor = vim
   compression = -1
@@ -16,13 +16,7 @@
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [credential]
-  helper = store --file ~/.config/git/secure/credentials
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-[include]
-  path = ~/.config/git/alias
-  path = ~/.config/git/functions
-  path = ~/.config/local/gitconfig.local
+  helper = store --file ~/.config/secure/git-credentials
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [init]
@@ -97,6 +91,12 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [receive]
   denyNonFastforwards = false
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[include]
+  path = ~/.config/git/alias
+  path = ~/.config/git/functions
+  path = ~/.config/local/gitconfig.local
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #end
