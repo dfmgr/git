@@ -134,8 +134,7 @@ if __am_i_online; then
     if [ -d "$PLUGDIR/oh-my-git/.git" ]; then
       execute "git_update $PLUGDIR/oh-my-git" "Updating plugin oh-my-git"
     else
-      execute
-      "git_clone https://github.com/arialdomartini/oh-my-git.git $PLUGDIR/oh-my-git" "Installing plugin oh-my-git"
+      execute "git_clone https://github.com/arialdomartini/oh-my-git.git $PLUGDIR/oh-my-git" "Installing plugin oh-my-git"
     fi
   fi
   # exit on fail
