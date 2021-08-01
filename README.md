@@ -5,7 +5,7 @@ Git is a version control system
 Automatic install/update:
 
 ```shell
-bash -c "$(curl -LSs https://github.com/dfmgr/git/raw/master/install.sh)"
+bash -c "$(curl -LSs https://github.com/dfmgr/git/raw/main/install.sh)"
 ```
 
 Manual install:
