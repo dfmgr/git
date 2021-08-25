@@ -1,88 +1,87 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [core]
-  abbrev = 12
-  attributesfile = ~/.config/secure/git/attributes
-  excludesfile = ~/.config/secure/git/ignore
-  autocrlf = input
-  editor = vim
-  compression = -1
-  packedGitLimit = 128m
-  packedGitWindowSize = 128m
-  fileMode = false
+abbrev = 12
+attributesfile = ~/.config/secure/git/attributes
+excludesfile = ~/.config/secure/git/ignore
+autocrlf = input
+editor = vim
+compression = -1
+packedGitLimit = 128m
+packedGitWindowSize = 128m
+fileMode = false
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [commit]
-  template = ~/.config/secure/git/message
+template = ~/.config/secure/git/message
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [credential]
-  helper = store --file ~/.config/secure/git/credentials
+helper = store --file ~/.config/secure/git/credentials
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [init]
-  defaultBranch = main
+defaultBranch = main
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [gpg]
-  program = gpg
+program = gpg
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [color "branch"]
-  current = green bold
-  local = green
-  remote = yellow
+current = green bold
+local = green
+remote = yellow
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [status]
-  submoduleSummary = 1
+submoduleSummary = 1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [color "diff"]
-  frag = magenta
-  meta = yellow
-  new = green
-  old = red
-  newMoved = cyan
-  oldMoved = blue
+frag = magenta
+meta = yellow
+new = green
+old = red
+newMoved = cyan
+oldMoved = blue
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [color "status"]
-  added = green reverse
-  changed = yellow reverse
-  untracked = red reverse
+added = green reverse
+changed = yellow reverse
+untracked = red reverse
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [diff]
-  colorMoved = zebra
-  submodule = log
+colorMoved = zebra
+submodule = log
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [diff "bin"]
-  textconv = hexdump -v -C
+textconv = hexdump -v -C
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [pack]
-  deltaCacheSize = 128m
-  packSizeLimit = 128m
-  windowMemory = 128m
+deltaCacheSize = 128m
+packSizeLimit = 128m
+windowMemory = 128m
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [pretty]
-  custom = "%C(magenta)%h%C(red)%d %C(yellow)%ar %C(green)%s %C(yellow)(%an)"
+custom = "%C(magenta)%h%C(red)%d %C(yellow)%ar %C(green)%s %C(yellow)(%an)"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [push]
-  followTags = true
-  recurseSubmodules = on-demand
+followTags = true
+recurseSubmodules = on-demand
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [pull]
-  rebase = false
+rebase = false
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [user]
-  useConfigOnly = true
+useConfigOnly = true
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [http]
-  sslVerify = false
-  postBuffer = 5m
+sslVerify = false
+postBuffer = 5m
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [receive]
-  denyNonFastforwards = false
+denyNonFastforwards = false
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [advice]
-	detachedHead = false
+detachedHead = false
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [include]
-  path = ~/.config/git/alias
-  path = ~/.config/git/functions
-  path = ~/.config/local/gitconfig.local
+path = ~/.config/git/alias
+path = ~/.config/git/functions
+path = ~/.config/local/gitconfig.local
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #end
-
