@@ -5,3 +5,5 @@ ignoredirmessage
 secure/*
 custom/*
 oh-my-git
+# ignore commit message
+.gitcommit
