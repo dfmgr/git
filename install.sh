@@ -145,7 +145,9 @@ fi
 # run post install scripts
 run_postinst() {
   dfmgr_run_post
-  mkd "$HOME/.config/secure"
+  mkd "$HOME/.config/git"
+  mkd "$HOME/.config/local"
+  mkd "$HOME/.config/secure/git"
   [ -f "$APPDIR/gitmessage" ] && [ ! -f "$HOME/.config/secure/git/message" ] && cp_rf "$APPDIR/gitmessage" "$HOME/.config/secure/git/message"
   [ -f "$APPDIR/gitignore" ] && [ ! -f "$HOME/.config/secure/git/ignore" ] && cp_rf "$APPDIR/gitignore" "$HOME/.config/secure/git/ignore"
   [ -f "$APPDIR/gitattributes" ] && [ ! -f "$HOME/.config/secure/git/attributes" ] && cp_rf "$APPDIR/gitattributes" "$HOME/.config/secure/git/attributes"
