@@ -79,9 +79,13 @@ denyNonFastforwards = false
 [advice]
 detachedHead = false
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[safe]
+directory = /
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [include]
 path = ~/.config/git/alias
 path = ~/.config/git/functions
 path = ~/.config/local/gitconfig.local
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 #end
