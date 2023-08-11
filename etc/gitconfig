@@ -80,7 +80,7 @@ denyNonFastforwards = false
 detachedHead = false
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [safe]
-directory = /
+directory = *
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [include]
 path = ~/.config/git/alias
